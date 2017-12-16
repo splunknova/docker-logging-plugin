@@ -1,39 +1,26 @@
-# Splunk Log-driver plugin for Docker
+# Splunk LogDriver plugin for Docker
 
-Splunk logging plugin allows docker containers to send their logs directly to a Splunk Enterprise service, a Splunk
-Cloud deployment, or to a SplunkNova account.
+The Splunk Log Driver plugin allows Docker containers to send their logs directly to a Splunk Enterprise service, a Splunk Cloud deployment, or to a Splunk Nova account.
 
 ## Getting Started
 
-You need to install Docker Engine >= 1.12.
+Install Docker Engine Community Edition (CE) or Enterprise Edition (EE) >= 1.12. See [Docker log driver plugins](https://docs.docker.com/engine/extend/plugins_logging/) for more information.
 
-Additional information about Docker plugins [can be found here.](https://docs.docker.com/engine/extend/plugins_logging/)
-
-
-### Developing
-
-For development, you can clone and run make
-
-```
-git clone git@github.com:splunk/docker-logging-plugin.git
-cd docker-logging-plugin
-make
-```
 
 ### Installing
 
-To install the plugin, you can run
+To install the plugin, run:
 
 ```
 docker plugin install splunk/docker-logging-driver:latest --alias splunk
 docker plugin ls
 ```
 
-This command will pull and enable the plugin
+This command pulls and enables the plugin.
 
-### Using
+### Usage
 
-The plugin uses the same parameters as the [splunk logging driver](https://docs.docker.com/engine/admin/logging/splunk/).
+You can configure Docker logging to use the splunk driver by default or on a per-container basis. The plugin uses the same parameters as the [splunk logging driver](https://docs.docker.com/engine/admin/logging/splunk/).
 
 
 #### Splunk Enterprise Example
@@ -53,9 +40,16 @@ $ docker run --log-driver=splunk \
 
 ```
 
-#### SplunkNova Example
+#### Splunk Cloud Example
 
-Once you make an account on www.splunknova.com, you can grab your API credentials and use them here.
+```
+$ docker run --example here
+
+```
+
+#### Splunk Nova Example
+
+Create an account on www.splunknova.com. Grab your API credentials and use them here.
 
 ```
 $ docker run --log-driver=splunk \
@@ -69,3 +63,12 @@ $ docker run --log-driver=splunk \
              -it ubuntu bash
 ```
 
+### Developing
+
+For development, clone and run make
+
+```
+git clone git@github.com:splunk/docker-logging-plugin.git
+cd docker-logging-plugin
+make
+```

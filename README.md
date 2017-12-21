@@ -1,4 +1,4 @@
-# Splunk Nova Loggging Driver plugin for Docker
+# Splunk Nova Logging Driver plugin for Docker
 
 The Splunk Nova Logging Driver plugin enables users to send their container logs directly to a Splunk Nova account from a Docker container. See [Splunk logging driver] to send container logs to
 [HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M) in Splunk Enterprise and Splunk Cloud.

@@ -1,61 +1,49 @@
-# Splunk Log-driver plugin for Docker
+# Splunk Nova Logging Driver plugin for Docker
 
-Splunk logging plugin allows docker containers to send their logs directly to a Splunk Enterprise service, a Splunk
-Cloud deployment, or to a SplunkNova account.
+The Splunk Nova Logging Driver plugin enables users to send their container logs directly to a Splunk Nova account from a Docker container. See [Splunk logging driver] to send container logs to
+[HTTP Event Collector](http://dev.splunk.com/view/event-collector/SP-CAAAE6M) in Splunk Enterprise and Splunk Cloud.
 
-## Getting Started
+## Get Started
 
-You need to install Docker Engine >= 1.12.
+Get started by creating an account on https://www.splunknova.com.
 
-Additional information about Docker plugins [can be found here.](https://docs.docker.com/engine/extend/plugins_logging/)
+### Prerequisites
 
+Sign up or log in to [Docker Hub]. If you have not used Docker before, see the [Getting started tutorial](https://docs.docker.com/mac/started) for Docker.
 
-### Developing
+### Install
 
-For development, you can clone and run make
+If necessary, download and install [Docker][docker] Community Edition (CE) or Enterprise Edition (EE) >= 1.12.
 
-```
-git clone git@github.com:splunk/docker-logging-plugin.git
-cd docker-logging-plugin
-make
-```
-
-### Installing
-
-To install the plugin, you can run
+Open a shell prompt or Terminal window and install the `splunk/docker-logging-driver.` plugin. To pull and enable the plugin, run:
 
 ```
 docker plugin install splunk/docker-logging-driver:latest --alias splunk
-docker plugin ls
 ```
 
-This command will pull and enable the plugin
-
-### Using
-
-The plugin uses the same parameters as the [splunk logging driver](https://docs.docker.com/engine/admin/logging/splunk/).
-
-
-#### Splunk Enterprise Example
+Verify installation by running:
 
 ```
-$ docker run --log-driver=splunk \
-             --log-opt splunk-url=https://your-splunkhost:8088 \
-             --log-opt splunk-token=176FCEBF-4CF5-4EDF-91BC-703796522D20 \
-             --log-opt splunk-capath=/path/to/cert/cacert.pem \
-             --log-opt splunk-caname=SplunkServerDefaultCert \
-             --log-opt tag="{{.Name}}/{{.FullID}}" \
-             --log-opt labels=location \
-             --log-opt env=TEST \
-             --env "TEST=false" \
-             --label location=west \
-             -it ubuntu bash
+$ docker plugin ls
+```
+This command lists all the Docker plugins that are currently installed.
 
 ```
+ID                  NAME                               TAG                 DESCRIPTION                ENABLED
+89443ca1c345        splunknova/docker-logging-plugin   latest              Nova plugin for Docker     true
+```
 
-#### SplunkNova Example
+### Configure
 
-Once you make an account on www.splunknova.com, you can grab your API credentials and use them here.
+You can configure Docker logging to use the splunk driver by default or on a per-container basis. The plugin uses the same parameters as the [splunk logging driver](https://docs.docker.com/engine/admin/logging/splunk/).
+
+## Usage
+
+Create an account on [www.splunknova.com][Splunk Nova]. Grab your API credentials and use them here.
+
+#### Splunk Nova Example
+
+Once you have your API credentials, replace the `splunk-token` with your Base-64 Encoded API Key from https://www.splunknova.com/apikeys.
 
 ```
 $ docker run --log-driver=splunk \
@@ -69,3 +57,20 @@ $ docker run --log-driver=splunk \
              -it ubuntu bash
 ```
 
+### Development
+
+To contribute to development, clone and run make
+
+```
+git clone git@github.com:splunk/docker-logging-plugin.git
+cd docker-logging-plugin
+make
+```
+
+See [Docker log driver plugins](https://docs.docker.com/engine/extend/plugins_logging/) for more information.
+
+[docker]: https://www.docker.com/get-docker
+[Docker Hub]: https://hub.docker.com
+[HTTP Event Collector]: http://dev.splunk.com/view/event-collector/SP-CAAAE6M
+[Splunk logging driver]: https://docs.docker.com/engine/admin/logging/splunk/
+[Splunk Nova]: https://splunknova.com
